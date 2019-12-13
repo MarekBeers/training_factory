@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class BezoekerController extends AbstractController
 {
     /**
@@ -41,11 +42,5 @@ class BezoekerController extends AbstractController
         return $this->render('pages/inschrijven.html.twig');
     }
 
-    /**
-     * @Route ("/login", name="login")
-     */
-    public function loginPage()
-    {
-        return $this->render('pages/login.html.twig');
-    }
+
 }

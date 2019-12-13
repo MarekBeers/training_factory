@@ -5,11 +5,11 @@
     {% include 'card.html.twig' %}
     <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
+            <a class="nav-link active" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
         </li>
         {% for i in 1..20 %}
             <li class="nav-item">
-                <a class="nav-link" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
+                <a class="nav-link" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
             </li>
         {% endfor %}
         <li class="nav-item">

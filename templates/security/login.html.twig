@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% include 'card.html.twig' %}
+
+    <br>
+
+    <form class="form-signin" method="post">
+
+        {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="mb-3">
+                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+        {% endif %}
+        <h1 class="h3 mb-3 font-weight-normal">Hier kunt u inloggen</h1>
+        <br>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email adres" required
+               autofocus autocomplete="off" value="{{ last_username }}">
+        <br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required
+               autocomplete="off" value="wachtwoord">
+        <br>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Onthoudt mij
+            </label>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('wachtwoord') }}">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Inloggen
+        </button>
+
+        <br>
+        <input style="width: 100%"
+               value="{{ csrf_token('wachtwoord') }}">
+
+        <br>
+    </form>
+
+{% endblock %}
