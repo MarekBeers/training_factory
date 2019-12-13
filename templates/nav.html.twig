@@ -1,0 +1,47 @@
+
+    <div class="d-flex" >
+        <div class="p-2 d-none d-sm-none d-md-block">
+            <img class="rounded" style="width: 200px;" src="{{ asset('images/kickboxing.png') }}">
+        </div>
+        <div class="p-2">
+            <h1 style="color: red; font: 3rem 'Bauhaus 93'" class="d-none d-sm-block">Training Centrum <br> Den Haag
+            </h1>
+            <h1 style="color: red; font: 2rem 'Bauhaus 93'" class="d-block d-sm-none">Training Centrum <br> Den Haag
+            </h1>
+        </div>
+
+            <form class="p-2 ml-auto text-danger">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="off" placeholder="wachtwoord">
+                </div>
+                <button type="submit" class="btn btn-primary">Verder</button>
+            </form>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-light border-top border-bottom border-danger">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                    <a class="nav-link text-danger" {% if app.request.get('_route') != 'home' %} href="/" {% endif %}>Home</a>
+                </li>
+                <li class="nav-item" {% if app.request.get('_route') == 'trainingaanbod' %} style="font-weight: bold" {% endif %}>
+                    <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>Training Aanbod</a>
+                </li>
+                <li class="nav-item" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
+                    <a class="nav-link text-danger" {% if app.request.get('_route') != 'inschrijven' %} href="/inschrijven" {% endif %}>Inschrijven op les </a>
+                </li>
+                <li class="nav-item" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
+                    <a class="nav-link text-danger" {% if app.request.get('_route') != 'inschrijven' %} href="/inschrijven" {% endif %}>Inschrijven op les </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" href="#">Gegevens lid wijzigen</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
