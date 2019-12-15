@@ -1,3 +1,4 @@
 # security.nl.yml
 "Invalid CSRF token.": "Wachtwoord is ongeldig."
 "Username could not be found.": "Oh no! It doesn't look like that email exists!"
+"Oh no! It doesn't look like that email exists!": "Oh nee! Het lijkt er op dat het e-mail niet bij ons bestaat!"

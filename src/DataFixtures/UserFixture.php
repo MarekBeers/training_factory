@@ -45,7 +45,7 @@ class UserFixture extends BaseFixture
 //        $user->setRoles($role);
 //
 //        $manager->persist($user);
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             $manager->persist($this->user($i));
         }
 
@@ -62,8 +62,13 @@ class UserFixture extends BaseFixture
             $user,
             'wachtwoord'
         ));
-        $role = array('role_user');
+        if ($i >= 2){
+            $role = array('ROLE_USER');
+        }else{
+            $role = array('ROLE_ADMIN');
+        }
         $user->setRoles($role);
+
         return $user;
 
     }

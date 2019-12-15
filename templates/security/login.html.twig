@@ -13,7 +13,7 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                Je bent ingelogt als {{ app.user.username }}, <a href="{{ path('app_logout') }}">Uitloggen</a>
             </div>
         {% endif %}
         <h1 class="h3 mb-3 font-weight-normal">Hier kunt u inloggen</h1>
@@ -24,7 +24,7 @@
         <br>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required
-               autocomplete="off" value="wachtwoord">
+              autocomplete="off" {#value="wachtwoordt"#}>
         <br>
         <div class="checkbox mb-3">
             <label>

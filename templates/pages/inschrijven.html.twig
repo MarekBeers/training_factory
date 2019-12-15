@@ -3,64 +3,98 @@
 
 {% block content %}
     {% include 'card.html.twig' %}
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
-        </li>
-        {% for i in 1..20 %}
+    <br>
+
+    {% if app.user %}
+        <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
+                <a style="" type="button" class="nav-link btn btn-warning" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
             </li>
-        {% endfor %}
-        <li class="nav-item">
-            <a class="nav-link" href="#">LATER</a>
-        </li>
-    </ul>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
+            {% for i in 1..15 %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
+                </li>
+            {% endfor %}
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">LATER</a>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <table class="table" style="text-align: center">
+            <thead>
+            <tr>
+                <th>Tijd</th>
+                <th>Sport</th>
+                <th>Aantal ingeschreven deelnemers</th>
+                <th>Prijs (EUR)</th>
+                <th>Inschrijven</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in 1..15 %}
+                <tr>
+                    <td>09:00</td>
+                    <td>MMA</td>
+                    <td>6</td>
+                    <td>14</td>
+                    <td><a type="button" class="btn btn-outline-success">Inschrijven</a></td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    {% else %}
+        <h1>Registreer hier een account om lessen te kunnen zien</h1>
+        <br>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4">
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity">
+            <div class="form-group">
+                <label for="inputAddress2">Address 2</label>
+                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
-            <div class="form-group col-md-4">
-                <label for="inputState">State</label>
-                <select id="inputState" class="form-control">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                </div>
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
-                    Check me out
-                </label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+    {% endif %}
+
 
 {% endblock %}
