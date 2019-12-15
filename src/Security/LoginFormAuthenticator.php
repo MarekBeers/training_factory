@@ -21,6 +21,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $userRepository;
     private $router;
     private $csrfTokenManager;
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
 
     public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -63,8 +67,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         // only needed if we need to check a password - we'll do that later!
-        dd($this->passwordEncoder->isPasswordValid($user, $credentials['password']));
+
+        dd($this->encodePassword($user, $credentials['password']), $this->passwordEncoder->isPasswordValid($user, $credentials['password']));
+
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+
+
+        return true;
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -76,4 +85,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         return $this->router->generate('app_login');
     }
+
+
 }
