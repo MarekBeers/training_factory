@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,11 +36,13 @@ class BezoekerController extends AbstractController
     }
 
     /**
-     * @Route ("/inschrijven", name="inschrijven")
+     * @Route("/inschrijven", name="inschrijven")
      */
-    public function inschrijvenPage()
+    public function inschrijvenOverzicht(TrainingRepository $trainingRepository): Response
     {
-        return $this->render('pages/inschrijven.html.twig');
+        return $this->render('pages/inschrijven.html.twig', [
+            'trainings' => $trainingRepository->findAll(),
+        ]);
     }
 
 

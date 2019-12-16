@@ -9,12 +9,12 @@
         </h1>
     </div>
     {% if app.user %}
-        <div class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>Je bent ingelogt als: <br><br> - {{ app.user.username }} - </h4><br> <a type="button" class="btn btn-outline-danger" href="{{ path('app_logout') }}">Uitloggen</a>
-        </div>
+        <form class="p-2 ml-auto text-danger" style="text-align: right">
+            <h4>Je bent ingelogt als: <br><br> - {{ app.user.username }} - <br><br></h4> <a type="button" class="btn btn-outline-danger" href="{{ path('app_logout') }}">Uitloggen</a>
+        </form>
     {% else %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4><br> U kunt hier klikken <br> om te inloggen</h4>
+            <h4>U kunt hier klikken <br><br> om te inloggen</h4><br>
             <a type="button" href="/login" class="btn btn-outline-danger">Inloggen</a>
         </form>
     {% endif %}

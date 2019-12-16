@@ -8,11 +8,11 @@
     {% if app.user %}
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a style="" type="button" class="nav-link btn btn-warning" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
+                <a style="" type="button" class="nav-link btn btn-warning" href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
             </li>
             {% for i in 1..15 %}
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='en')|upper }}</a>
+                    <a class="nav-link text-dark" href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
                 </li>
             {% endfor %}
             <li class="nav-item">
@@ -28,17 +28,24 @@
                 <th>Sport</th>
                 <th>Aantal ingeschreven deelnemers</th>
                 <th>Prijs (EUR)</th>
+                <th>Beschrijving</th>
                 <th>Inschrijven</th>
             </tr>
             </thead>
             <tbody>
-            {% for i in 1..15 %}
+            {% for training in trainings %}
+            <tr>
+                <td>{{ training.duration ? training.duration|date('H:i') : '' }}</td>
+                <td>{{ training.naam }}</td>
+                <td>?</td>
+                <td>{{ training.description }}</td>
+                <td>{{ training.costs }}</td>
+                <td><button type="button" class="btn btn-outline-success">Inschrijven</button></td>
+
+            </tr>
+            {% else %}
                 <tr>
-                    <td>09:00</td>
-                    <td>MMA</td>
-                    <td>6</td>
-                    <td>14</td>
-                    <td><a type="button" class="btn btn-outline-success">Inschrijven</a></td>
+                    <td colspan="6">no records found</td>
                 </tr>
             {% endfor %}
 
