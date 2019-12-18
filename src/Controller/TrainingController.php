@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * @Route("/training")
+ * @Route("admin/training")
  */
 class TrainingController extends AbstractController
 {

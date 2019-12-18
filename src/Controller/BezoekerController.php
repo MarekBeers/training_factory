@@ -28,6 +28,22 @@ class BezoekerController extends AbstractController
     }
 
     /**
+     * @Route ("/lidworden", name="lidworden")
+     */
+    public function lidwordenPage()
+    {
+        return $this->render('pages/lidworden.html.twig');
+    }
+
+    /**
+     * @Route ("/regels", name="regels")
+     */
+    public function regelsPage()
+    {
+        return $this->render('pages/regels.html.twig');
+    }
+
+    /**
      * @Route ("/trainingaanbod", name="trainingaanbod")
      */
     public function trainingaanbodPage(TrainingRepository $trainingRepository): Response

@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
+use App\Entity\user;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -17,7 +17,7 @@ class UserFixture extends BaseFixture
 
     public function loadData(ObjectManager $manager)
     {
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             $manager->persist($this->user($i));
         }
         $manager->flush();
@@ -25,9 +25,13 @@ class UserFixture extends BaseFixture
 
     public function user($i)
     {
-        $user = new User();
+        $user = new user();
         $user->setEmail(sprintf('tester%d@gmail.com', $i));
+        $user->setLoginname(sprintf('tester%d', $i));
+        $user->setLastname(sprintf('tester%d', $i));
         $user->setFirstname(sprintf('tester%d', $i));
+        $user->setDateofbirth(sprintf('tester%d', $i));
+        $user->setGender(sprintf('tester%d', $i));
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'wachtwoord'

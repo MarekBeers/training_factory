@@ -25,13 +25,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
+    private $security;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(Security $security, UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->security = $security;
     }
 
     public function supports(Request $request)
@@ -44,15 +46,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
+            'loginname' => $request->request->get('loginname'),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials['loginname']
         );
         return $credentials;
+        dd($credentials);
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -61,24 +64,33 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        return $this->userRepository->findOneBy(['email' => $credentials['email']]);
+
+        return $this->userRepository->findOneBy(['loginname' => $credentials['loginname']]);
     }
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        //dd($user->roles, $user);
         // only needed if we need to check a password - we'll do that later!
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new RedirectResponse($this->router->generate('home'));
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return new RedirectResponse($this->router->generate('adminhome'));
+        }
+        if ($this->security->isGranted('ROLE_USER')) {
+            return new RedirectResponse($this->router->generate('home'));
+        }
     }
 
     protected function getLoginUrl()
     {
         return $this->router->generate('app_login');
     }
+
 
 
 }
