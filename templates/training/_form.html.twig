@@ -1,5 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    {{ form_row(form.brochure) }}
     <a type="button" class="btn btn-outline-success" href="{{ path('training_index') }}">Terug</a>
     <button class="btn btn-outline-warning d-inline">{{ button_label|default('Save') }}</button>
 

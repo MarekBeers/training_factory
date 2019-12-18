@@ -43,6 +43,12 @@ class Training
      */
     private $lessons;
 
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $BrochureFilename;
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
@@ -128,6 +134,18 @@ class Training
                 $lesson->setTrainingId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBrochureFilename(): ?string
+    {
+        return $this->BrochureFilename;
+    }
+
+    public function setBrochureFilename($brochureFilename): self
+    {
+        $this->BrochureFilename = $brochureFilename;
 
         return $this;
     }

@@ -30,9 +30,11 @@ class BezoekerController extends AbstractController
     /**
      * @Route ("/trainingaanbod", name="trainingaanbod")
      */
-    public function trainingaanbodPage()
+    public function trainingaanbodPage(TrainingRepository $trainingRepository): Response
     {
-        return $this->render('pages/trainingaanbod.html.twig');
+        return $this->render('pages/trainingaanbod.html.twig', [
+            'trainings' => $trainingRepository->findAll(),
+        ]);
     }
 
     /**
