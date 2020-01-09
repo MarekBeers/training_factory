@@ -28,23 +28,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
-                <a class="nav-link text-danger" {% if app.request.get('_route') != 'home' %} href="/" {% endif %}>Home</a>
-            </li>
-            <li class="nav-item" {% if app.request.get('_route') == 'trainingaanbod' %} style="font-weight: bold" {% endif %}>
-                <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>Training
-                    Aanbod</a>
-            </li>
-            <li class="nav-item" {% if app.request.get('_route') == 'contact' %} style="font-weight: bold" {% endif %}>
-                <a class="nav-link text-danger" {% if app.request.get('_route') != 'contact' %} href="/contact" {% endif %}>Contact info</a>
-            </li>
-            <li class="nav-item" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
-                <a class="nav-link text-danger" {% if app.request.get('_route') != 'inschrijven' %} href="/inschrijven" {% endif %}>Inschrijven
-                    op les </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-danger" href="#">Gegevens lid wijzigen</a>
-            </li>
+{#            <li class="nav-item" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>#}
+{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'home' %} href="/" {% endif %}>Home</a>#}
+{#            </li>#}
+{#            <li class="nav-item" {% if app.request.get('_route') == 'trainingaanbod' %} style="font-weight: bold" {% endif %}>#}
+{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>Training#}
+{#                    Aanbod</a>#}
+{#            </li>#}
+{#            <li class="nav-item" {% if app.request.get('_route') == 'contact' %} style="font-weight: bold" {% endif %}>#}
+{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'contact' %} href="/contact" {% endif %}>Contact info</a>#}
+{#            </li>#}
+{#            <li class="nav-item" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>#}
+{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'inschrijven' %} href="/inschrijven" {% endif %}>Inschrijven#}
+{#                    op les </a>#}
+{#            </li>#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link text-danger" href="#">Gegevens lid wijzigen</a>#}
+{#            </li>#}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"
@@ -58,12 +58,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/user" {% if app.request.get('_route') == 'user_index' %} style="font-weight: bold" {% endif %}>
                         Leden</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
                         Trainingen</a>
                 </li>
             {% elseif is_granted('ROLE_USER') %}
@@ -74,7 +74,7 @@
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="/inschrijven" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
                         Inschrijven op les</a>
                 </li>
                 <li class="nav-item text-danger">

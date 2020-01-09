@@ -1,29 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
-
-{% block body %}
+{% block content %}
     <h1>User index</h1>
 
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
                 <th>Loginname</th>
-                <th>Password</th>
-                <th>Firstname</th>
-                <th>Preprovision</th>
-                <th>Lastname</th>
-                <th>Dateofbirth</th>
-                <th>Gender</th>
-                <th>Hiring_date</th>
-                <th>Salary</th>
-                <th>Street</th>
-                <th>Postal_code</th>
-                <th>Place</th>
-                <th>Roles</th>
-                <th>actions</th>
+                <th>Eerstenaam</th>
+                <th>Tussen voegsel</th>
+                <th>Achternaam</th>
+                <th>Acties</th>
             </tr>
         </thead>
         <tbody>
@@ -32,21 +21,19 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.loginname }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.preprovision }}</td>
                 <td>{{ user.lastname }}</td>
-                <td>{{ user.dateofbirth }}</td>
-                <td>{{ user.gender }}</td>
-                <td>{{ user.hiringDate }}</td>
-                <td>{{ user.salary }}</td>
-                <td>{{ user.street }}</td>
-                <td>{{ user.postalCode }}</td>
-                <td>{{ user.place }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+{#                <td>#}
+{#                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>#}
+{#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
+{#                </td>#}
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a type="button" class="btn btn-outline-success"
+                       href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a type="button" class="btn btn-outline-warning"
+                       href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    {{ include('user/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -56,6 +43,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a type="button" class="btn btn-outline-success"
+       href="{{ path('user_new') }}">Aanmaken</a>
 {% endblock %}

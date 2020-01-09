@@ -55,7 +55,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             $credentials['loginname']
         );
         return $credentials;
-        dd($credentials);
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)

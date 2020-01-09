@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/user")
+ * @Route("admin/user")
  */
 class UserController extends AbstractController
 {
@@ -72,8 +72,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
+            $this->addFlash('success', 'section.backoffice.users.edit_roles.confirmation');
             $this->getDoctrine()->getManager()->flush();
-
 
             return $this->redirectToRoute('user_index');
         }

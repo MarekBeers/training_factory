@@ -21,59 +21,12 @@
             </div>
         </div>
         <br>
-{#        <tr>#}
-{#            <td>{{ training.duration ? training.duration|date('H:i') : '' }}</td>#}
-{#            <td>{{ training.naam }}</td>#}
-{#            <td>?</td>#}
-{#            <td>{{ training.description }}</td>#}
-{#            <td>{{ training.costs }}</td>#}
-{#            <td><button type="button" class="btn btn-outline-success">Inschrijven</button></td>#}
-
-{#        </tr>#}
     {% else %}
         <tr>
-            <td colspan="6">no records found</td>
+            <td colspan="6">Geen Trainingen gevonden</td>
         </tr>
     {% endfor %}
-    <div class="row">
-        <div class="col-md-2">
-            <img class="img-fluid rounded " src="{{ asset('images/stootzak.png') }}" alt="">
-        </div>
-        <div class="col-sm-5">
-            <div class="row align-items-center" style="height: 50%">
-                <div class="col">
-                    <h2>Stootzak training</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-2">
-            <img class="img-fluid rounded " src="{{ asset('images/kickboxen.png') }}" alt="">
-        </div>
-        <div class="col-sm-5">
-            <div class="row align-items-center" style="height: 50%">
-                <div class="col">
-                    <h2>KickBoksen</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-2">
-            <img class="img-fluid rounded " src="{{ asset('images/mmatraining.png') }}" alt="">
-        </div>
-        <div class="col-sm-5">
-            <div class="row align-items-center" style="height: 50%">
-                <div class="col">
-                    <h2>MMA</h2>
-                </div>
-            </div>
 
-        </div>
-    </div>
 
 
 

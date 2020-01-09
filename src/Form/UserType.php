@@ -4,28 +4,43 @@ namespace App\Form;
 
 use App\Entity\user;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('loginname')
-            ->add('password')
+            ->add('password', PasswordType::class)
             ->add('firstname')
             ->add('preprovision')
             ->add('lastname')
-            ->add('dateofbirth')
+            ->add('dateofbirth', BirthdayType::class, [
+                // this is actually the default format for single_text
+                'format' => 'dd-MM-yyyy',
+            ])
             ->add('gender')
-            ->add('hiring_date')
-            ->add('salary')
             ->add('street')
             ->add('postal_code')
             ->add('place')
-//            ->add('roles')
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Geslacht' => [
+                        'Man' => 'Man',
+                        'Vrouw' => 'Vrouw',
+                    ],
+                ],
+            ]);
+
         ;
     }
 
