@@ -32,7 +32,7 @@
 {#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'home' %} href="/" {% endif %}>Home</a>#}
 {#            </li>#}
 {#            <li class="nav-item" {% if app.request.get('_route') == 'trainingaanbod' %} style="font-weight: bold" {% endif %}>#}
-{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>Training#}
+{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>training#}
 {#                    Aanbod</a>#}
 {#            </li>#}
 {#            <li class="nav-item" {% if app.request.get('_route') == 'contact' %} style="font-weight: bold" {% endif %}>#}
@@ -53,12 +53,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/user/instructeurs" {% if app.request.get('_route') == 'instructeurs' %} style="font-weight: bold" {% endif %}>
                         Instructeurs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/admin/user" {% if app.request.get('_route') == 'user_index' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/user/gebruikers" {% if app.request.get('_route') == 'user_index' %} style="font-weight: bold" {% endif %}>
                         Leden</a>
                 </li>
                 <li class="nav-item">

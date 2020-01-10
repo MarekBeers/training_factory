@@ -16,26 +16,42 @@
             </tr>
         </thead>
         <tbody>
+
         {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.loginname }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.preprovision }}</td>
-                <td>{{ user.lastname }}</td>
-{#                <td>#}
-{#                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>#}
-{#                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
-{#                </td>#}
-                <td>
-                    <a type="button" class="btn btn-outline-success"
-                       href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a type="button" class="btn btn-outline-warning"
-                       href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                    {{ include('user/_delete_form.html.twig') }}
-                </td>
-            </tr>
+            {% if "ROLE_USER" in user.roles and app.request.get('_route') == 'user_index' %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.loginname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.preprovision }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>
+                        <a type="button" class="btn btn-outline-success"
+                           href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                        <a type="button" class="btn btn-outline-warning"
+                           href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                        {{ include('user/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% endif %}
+            {%  if "ROLE_ADMIN" in user.roles and app.request.get('_route') == 'instructeurs' %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.loginname }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.preprovision }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>
+                        <a type="button" class="btn btn-outline-success"
+                           href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                        <a type="button" class="btn btn-outline-warning"
+                           href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                        {{ include('user/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="16">no records found</td>

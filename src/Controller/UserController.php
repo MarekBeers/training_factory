@@ -17,7 +17,17 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/instructeurs", name="instructeurs", methods={"GET"})
+     */
+    public function instructeurs(UserRepository $userRepository): Response
+    {
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/gebruikers", name="user_index", methods={"GET"})
      */
     public function index(UserRepository $userRepository): Response
     {
@@ -97,4 +107,6 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
+
 }

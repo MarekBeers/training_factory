@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Training;
+use App\Entity\training;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,7 +42,7 @@ class TrainingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Training::class,
+            'data_class' => training::class,
         ]);
     }
 }

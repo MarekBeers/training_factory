@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Training;
+use App\Entity\training;
 use App\Form\TrainingType;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +34,7 @@ class TrainingController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $training = new Training();
+        $training = new training();
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
 
@@ -84,7 +84,7 @@ class TrainingController extends AbstractController
     /**
      * @Route("/{id}", name="training_show", methods={"GET"})
      */
-    public function show(Training $training): Response
+    public function show(training $training): Response
     {
         return $this->render('training/show.html.twig', [
             'training' => $training,
@@ -94,7 +94,7 @@ class TrainingController extends AbstractController
     /**
      * @Route("/{id}/edit", name="training_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Training $training): Response
+    public function edit(Request $request, training $training): Response
     {
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
@@ -114,7 +114,7 @@ class TrainingController extends AbstractController
     /**
      * @Route("/{id}", name="training_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Training $training): Response
+    public function delete(Request $request, training $training): Response
     {
         if ($this->isCsrfTokenValid('delete'.$training->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
