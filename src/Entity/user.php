@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -88,7 +90,20 @@ class user implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lesson", mappedBy="instructeur")
+     */
+    private $lessons;
 
+
+
+
+    public function __construct()
+    {
+        $this->lessons = new ArrayCollection();
+        $this->registrations = new ArrayCollection();
+        $this->training = new ArrayCollection();
+    }
 
 
 
@@ -301,4 +316,39 @@ class user implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Lesson[]
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lesson $lesson): self
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons[] = $lesson;
+            $lesson->setInstructeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lesson $lesson): self
+    {
+        if ($this->lessons->contains($lesson)) {
+            $this->lessons->removeElement($lesson);
+            // set the owning side to null (unless already changed)
+            if ($lesson->getInstructeur() === $this) {
+                $lesson->setInstructeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
 }

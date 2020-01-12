@@ -19,8 +19,6 @@ class LessonType extends AbstractType
             ->add('date')
             ->add('location')
             ->add('max_persons', IntegerType::class)
-            ->add('instructor_id')
-
             ->add('training_id', EntityType::class,  [
 
                 // looks for choices from this entity
@@ -29,9 +27,6 @@ class LessonType extends AbstractType
                 // uses the User.username property as the visible option string
                 'choice_label' => 'naam',
 
-                // used to render a select box, check boxes or radios
-                 //'multiple' => true,
-                 'expanded' => true,
             ])
 
         ;

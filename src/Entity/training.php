@@ -49,6 +49,7 @@ class training
      */
     private $BrochureFilename;
 
+
     public function __construct()
     {
         $this->lessons = new ArrayCollection();
@@ -149,4 +150,6 @@ class training
 
         return $this;
     }
+
+
 }

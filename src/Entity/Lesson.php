@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\user;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,10 +40,6 @@ class Lesson
      */
     private $max_persons;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="person", inversedBy="lessons")
-     */
-    private $instructor_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="training", inversedBy="lessons")
@@ -54,9 +51,16 @@ class Lesson
      */
     private $registrations;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="lessons")
+     */
+    private $instructeur;
+
+
     public function __construct()
     {
         $this->registrations = new ArrayCollection();
+        $this->instructeur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,17 +116,6 @@ class Lesson
         return $this;
     }
 
-    public function getInstructorId(): ?person
-    {
-        return $this->instructor_id;
-    }
-
-    public function setInstructorId(?person $instructor_id): self
-    {
-        $this->instructor_id = $instructor_id;
-
-        return $this;
-    }
 
     public function getTrainingId(): ?training
     {
@@ -166,4 +159,18 @@ class Lesson
 
         return $this;
     }
+
+    public function getInstructeur(): ?user
+    {
+        return $this->instructeur;
+    }
+
+    public function setInstructeur(?user $instructeur): self
+    {
+        $this->instructeur = $instructeur;
+
+        return $this;
+    }
+
+
 }

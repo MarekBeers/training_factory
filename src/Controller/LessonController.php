@@ -31,11 +31,17 @@ class LessonController extends AbstractController
     public function new(Request $request): Response
     {
         $lesson = new Lesson();
+        $user = $this->getUser();
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $lesson->setInstructorId(6);
+
+//            dd($user->getId());
+            $lesson->setInstructeur();
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lesson);
             $entityManager->flush();

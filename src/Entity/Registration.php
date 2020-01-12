@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,10 +28,12 @@ class Registration
      */
     private $lesson_id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="person", inversedBy="registrations")
-     */
-    private $person_id;
+
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -61,16 +65,5 @@ class Registration
         return $this;
     }
 
-    public function getPersonId(): ?person
-    {
-        return $this->person_id;
-    }
-
-    public function setPersonId(?person $person_id): self
-    {
-        $this->person_id = $person_id;
-
-        return $this;
-    }
 
 }
