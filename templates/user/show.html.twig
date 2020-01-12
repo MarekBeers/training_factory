@@ -66,8 +66,14 @@
         </tbody>
     </table>
 
-    <a type="button" class="btn btn-outline-success"
-       href="{{ path('user_index') }}">terug</a>
+    {% if "ROLE_USER" in user.roles %}
+        <a type="button" class="btn btn-outline-success"
+           href="{{ path('user_index') }}">terug</a>
+    {% elseif "ROLE_INSTRUCTEUR" in user.roles %}
+        <a type="button" class="btn btn-outline-success"
+           href="{{ path('instructeurs') }}">terug</a>
+    {% endif %}
+
 
 {#    <a href="{{ path('user_index') }}">back to list</a>#}
 

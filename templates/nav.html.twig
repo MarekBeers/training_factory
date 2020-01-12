@@ -66,25 +66,46 @@
                        href="/admin/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
                         Trainingen</a>
                 </li>
-            {% elseif is_granted('ROLE_USER') %}
+            {% elseif is_granted('ROLE_INSTRUCTEUR') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>
+                       href="/instructeur/" {% if app.request.get('_route') == 'instructeurhome' %} style="font-weight: bold" {% endif %}>
                         Home</a>
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="/inschrijven" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>
-                        Inschrijven op les</a>
+                       href="/instructeur/lessen" {% if app.request.get('_route') == 'instructeurlesson_index' %} style="font-weight: bold" {% endif %}>
+                        Lessen</a>
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="/user/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
                         Overzicht inschrijven</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
+                       href="/user/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                        Gegevens lid wijzigen</a>
+                </li>
+            {% elseif is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link text-danger"
+                       href="/user/" {% if app.request.get('_route') == 'userhome' %} style="font-weight: bold" {% endif %}>
+                        Home</a>
+                </li>
+                <li class="nav-item text-danger">
+                    <a class="nav-link text-danger"
+                       href="/user/inschrijven" {% if app.request.get('_route') == 'userinschrijven' %} style="font-weight: bold" {% endif %}>
+                        Inschrijven op les</a>
+                </li>
+                <li class="nav-item text-danger">
+                    <a class="nav-link text-danger"
                        href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                        Overzicht inschrijven</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger"
+                       href="/user/{{ app.user.id }}/edit" {% if app.request.get('_route') == 'useruser_edit' %} style="font-weight: bold" {% endif %}>
                         Gegevens lid wijzigen</a>
                 </li>
             {% else %}

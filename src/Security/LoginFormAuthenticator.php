@@ -80,8 +80,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return new RedirectResponse($this->router->generate('adminhome'));
         }
+        if ($this->security->isGranted('ROLE_INSTRUCTEUR')) {
+            return new RedirectResponse($this->router->generate('instructeurhome'));
+        }
         if ($this->security->isGranted('ROLE_USER')) {
-            return new RedirectResponse($this->router->generate('home'));
+            return new RedirectResponse($this->router->generate('userhome'));
         }
     }
 

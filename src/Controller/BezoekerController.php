@@ -41,6 +41,8 @@ class BezoekerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $role = array('ROLE_USER');
+            $user->setRoles($role);
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
@@ -74,15 +76,7 @@ class BezoekerController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/inschrijven", name="inschrijven")
-     */
-    public function inschrijvenOverzicht(TrainingRepository $trainingRepository): Response
-    {
-        return $this->render('pages/inschrijven.html.twig', [
-            'trainings' => $trainingRepository->findAll(),
-        ]);
-    }
+
 
 
 }

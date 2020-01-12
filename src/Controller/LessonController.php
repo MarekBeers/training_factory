@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/lesson")
+ * @Route("/instructeur/lessen")
  */
 class LessonController extends AbstractController
 {
@@ -35,6 +35,7 @@ class LessonController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            $lesson->setInstructorId(6);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lesson);
             $entityManager->flush();

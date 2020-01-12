@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Lesson;
 use App\Entity\training;
+use App\Entity\user;
 use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,16 +17,22 @@ class LessonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            return new RedirectResponse($this->router->generate('adminhome'));
-        }
 
         $builder
             ->add('time')
             ->add('date')
             ->add('location')
-            ->add('max_persons')
-            ->add('instructor_id')
+            ->add('instructor_id', EntityType::class,  [
+                // looks for choices from this entity
+                'class' => user::class,
+
+                // uses the User.username property as the visible option string
+                'choice_label' => 'firstname',
+
+                // used to render a select box, check boxes or radios
+                //'multiple' => true,
+                'expanded' => true,
+            ])
 
             ->add('training_id', EntityType::class,  [
                 // looks for choices from this entity

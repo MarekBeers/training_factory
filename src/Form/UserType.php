@@ -17,31 +17,30 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (is_granted('ROLE_ADMIN')) {
-            $builder
-                ->add('email', EmailType::class)
-                ->add('loginname')
-                ->add('password', PasswordType::class)
-                ->add('firstname')
-                ->add('preprovision')
-                ->add('lastname')
-                ->add('dateofbirth', BirthdayType::class, [
-                    // this is actually the default format for single_text
-                    'format' => 'dd-MM-yyyy',
-                ])
-                ->add('gender')
-                ->add('street')
-                ->add('postal_code')
-                ->add('place')
-                ->add('gender', ChoiceType::class, [
-                    'choices' => [
-                        'Geslacht' => [
-                            'Man' => 'Man',
-                            'Vrouw' => 'Vrouw',
-                        ],
+        $builder
+            ->add('email', EmailType::class)
+            ->add('loginname')
+            ->add('password', PasswordType::class)
+            ->add('firstname')
+            ->add('preprovision')
+            ->add('lastname')
+            ->add('dateofbirth', BirthdayType::class, [
+                // this is actually the default format for single_text
+                'format' => 'dd-MM-yyyy',
+            ])
+            ->add('gender')
+            ->add('street')
+            ->add('postal_code')
+            ->add('place')
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Geslacht' => [
+                        'Man' => 'Man',
+                        'Vrouw' => 'Vrouw',
                     ],
-                ]);;
-        }
+                ],
+            ]);;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

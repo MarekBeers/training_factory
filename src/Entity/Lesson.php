@@ -35,7 +35,7 @@ class Lesson
     private $location;
 
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $max_persons;
 

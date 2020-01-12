@@ -1,11 +1,16 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     {% if is_granted('ROLE_ADMIN') %}
-        <a type="button" class="btn btn-outline-success "
-           href="{{ path('user_index') }}">Terug</a>
+        {% if app.request.get('_route') == 'user_new' %}
+            <a type="button" class="btn btn-outline-success"
+               href="{{ path('user_index') }}">terug</a>
+        {% elseif app.request.get('_route') == 'instructeur_new' %}
+            <a type="button" class="btn btn-outline-success"
+               href="{{ path('instructeurs') }}">terug</a>
+        {% endif %}
     {% endif %}
     <button class="btn btn-outline-warning ">{{ button_label|default('Save') }}</button>
-    {% if app.request.get('_route') != 'user_new' and app.request.get('_route') != 'lidworden' %}
+    {% if app.request.get('_route') != 'user_new' and app.request.get('_route') != 'lidworden' and app.request.get('_route') != 'instructeur_new' and app.request.get('_route') != 'useruser_edit' %}
         {{ include('user/_delete_form.html.twig') }}
     {% endif %}
 {{ form_end(form) }}

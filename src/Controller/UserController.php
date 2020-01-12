@@ -46,6 +46,8 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $role = array('ROLE_USER');
+            $user->setRoles($role);
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
@@ -53,6 +55,33 @@ class UserController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render('user/new.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/newinstructeur", name="instructeur_new", methods={"GET","POST"})
+     */
+    public function newinstructeur(Request $request, UserPasswordEncoderInterface $encoder): Response
+    {
+        $user = new user();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $role = array('ROLE_INSTRUCTEUR');
+            $user->setRoles($role);
+            $entityManager = $this->getDoctrine()->getManager();
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('instructeurs');
         }
 
         return $this->render('user/new.html.twig', [

@@ -34,8 +34,7 @@
                         {{ include('user/_delete_form.html.twig') }}
                     </td>
                 </tr>
-            {% endif %}
-            {%  if "ROLE_ADMIN" in user.roles and app.request.get('_route') == 'instructeurs' %}
+            {%  elseif "ROLE_INSTRUCTEUR" in user.roles and app.request.get('_route') == 'instructeurs' %}
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
@@ -54,11 +53,16 @@
             {% endif %}
         {% else %}
             <tr>
-                <td colspan="16">no records found</td>
+                <td colspan="6">Geen User's Gevonden</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a type="button" class="btn btn-outline-success"
-       href="{{ path('user_new') }}">Aanmaken</a>
+        {% if app.request.get('_route') == 'user_index' %}
+            <a type="button" class="btn btn-outline-success"
+               href="{{ path('user_new') }}">Aanmaken</a>
+        {%  elseif app.request.get('_route') == 'instructeurs' %}
+            <a type="button" class="btn btn-outline-success"
+               href="{{ path('instructeur_new') }}">Aanmaken</a>
+        {% endif %}
 {% endblock %}
