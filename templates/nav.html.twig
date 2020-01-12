@@ -48,7 +48,7 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/admin/home" {% if app.request.get('_route') == 'adminhome' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/" {% if app.request.get('_route') == 'adminhome' %} style="font-weight: bold" {% endif %}>
                         Home</a>
                 </li>
                 <li class="nav-item">
@@ -74,17 +74,17 @@
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="/instructeur/lessen" {% if app.request.get('_route') == 'instructeurlesson_index' %} style="font-weight: bold" {% endif %}>
+                       href="/instructeur/lessen" {% if app.request.get('_route') == 'lesson_index' %} style="font-weight: bold" {% endif %}>
                         Lessen</a>
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="/user/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
                         Overzicht inschrijven</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/user/#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
                         Gegevens lid wijzigen</a>
                 </li>
             {% elseif is_granted('ROLE_USER') %}
