@@ -20,13 +20,9 @@ class LessonType extends AbstractType
             ->add('location')
             ->add('max_persons', IntegerType::class)
             ->add('training_id', EntityType::class,  [
-
-                // looks for choices from this entity
                 'class' => training::class,
-
-                // uses the User.username property as the visible option string
                 'choice_label' => 'naam',
-
+                'label'=> 'Training',
             ])
 
         ;

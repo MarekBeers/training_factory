@@ -9,26 +9,32 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>training</th>
                 <th>Time</th>
                 <th>Date</th>
                 <th>Location</th>
-                <th>Max_persons</th>
+                <th>Max Personen</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+
         {% for lesson in lessons %}
-            <tr>
-                <td>{{ lesson.id }}</td>
-                <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
-                <td>{{ lesson.date ? lesson.date|date('Y-m-d') : '' }}</td>
-                <td>{{ lesson.location }}</td>
-                <td>{{ lesson.maxPersons }}</td>
-                <td>
-                    <a href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
-                    <a href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
-                </td>
-            </tr>
+            {% if app.user.id == lesson.instructeur.id %}
+                <tr>
+                    <td>{{ lesson.id }}</td>
+                    <td>{{ lesson.trainingId.naam }}</td>
+                    <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
+                    <td>{{ lesson.date ? lesson.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ lesson.location }}</td>
+                    <td>{{ lesson.maxPersons }}</td>
+                    <td>
+                        <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
+                        <a type="button" class="btn btn-outline-warning d-inline" href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
+                        {{ include('lesson/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="6">no records found</td>
@@ -37,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('lesson_new') }}">Create new</a>
+    <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_new') }}">Aanmaken</a>
 {% endblock %}

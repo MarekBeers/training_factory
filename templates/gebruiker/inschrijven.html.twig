@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+{% block content %}
+    {% include 'card.html.twig' %}
+    <br>
+
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a style="" type="button" class="nav-link btn btn-warning"
+               href="#">{{ "now"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
+        </li>
+        {% for i in 1..15 %}
+            <li class="nav-item">
+                <a class="nav-link text-dark"
+                   href="#">{{ "+#{i}days"|format_datetime(pattern="E d LLL", locale='nl')|upper }}</a>
+            </li>
+        {% endfor %}
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="#">LATER</a>
+        </li>
+    </ul>
+    <br>
+    <br>
+    <table class="table" style="text-align: center">
+        <thead>
+        <tr>
+            <th>Tijd</th>
+            <th>Sport</th>
+            <th>Aantal ingeschreven deelnemers</th>
+            <th>Prijs (EUR)</th>
+            <th>Beschrijving</th>
+            <th>Inschrijven</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for lesson in lessons %}
+            <tr>
+                <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
+                <td>{{ lesson.trainingId.naam }}</td>
+                <td>{{ lesson.maxPersons }}</td>
+                <td>{{ lesson.trainingId.costs }}</td>
+                <td>{{ lesson.trainingId.description }}</td>
+                <td><a type="button" class="btn btn-outline-success" href="#">Inschrijven</a></td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

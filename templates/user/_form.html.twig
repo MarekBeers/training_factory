@@ -7,6 +7,9 @@
         {% elseif app.request.get('_route') == 'instructeur_new' %}
             <a type="button" class="btn btn-outline-success"
                href="{{ path('instructeurs') }}">terug</a>
+        {% elseif app.request.get('_route') == 'user_edit' %}
+            <a type="button" class="btn btn-outline-success"
+               href="{{ path('instructeurs') }}">terug</a>
         {% endif %}
     {% endif %}
     <button class="btn btn-outline-warning ">{{ button_label|default('Save') }}</button>

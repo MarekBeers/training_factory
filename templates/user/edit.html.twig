@@ -5,6 +5,11 @@
 {% block content %}
     <h1>Edit Gebruiker</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
-
+    {% if "ROLE_USER" in app.user.roles %}
+        {% if app.user.id == user.id %}
+            {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {% endif %}
+    {% else %}
+        {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    {% endif %}
 {% endblock %}

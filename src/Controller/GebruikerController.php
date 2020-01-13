@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\user;
 use App\Form\UserType;
+use App\Repository\LessonRepository;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,10 +29,10 @@ class GebruikerController extends AbstractController
     /**
      * @Route("/inschrijven", name="inschrijven")
      */
-    public function inschrijvenOverzicht(TrainingRepository $trainingRepository): Response
+    public function inschrijvenOverzicht(LessonRepository $lessonRepository): Response
     {
-        return $this->render('pages/inschrijven.html.twig', [
-            'trainings' => $trainingRepository->findAll(),
+        return $this->render('gebruiker/inschrijven.html.twig', [
+            'lessons' => $lessonRepository->findAll(),
         ]);
     }
 
@@ -49,7 +50,7 @@ class GebruikerController extends AbstractController
             $this->addFlash('success', 'section.backoffice.users.edit_roles.confirmation');
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('userhome');
         }
 
         return $this->render('user/edit.html.twig', [
