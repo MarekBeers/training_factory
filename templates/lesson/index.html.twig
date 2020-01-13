@@ -4,44 +4,45 @@
 
 {% block content %}
     <h1>Lesson index</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>training</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Max Personen</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>training</th>
-                <th>Time</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Max Personen</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        {% for lesson in lessons %}
-            {% if app.user.id == lesson.instructeur.id %}
-                <tr>
-                    <td>{{ lesson.id }}</td>
-                    <td>{{ lesson.trainingId.naam }}</td>
-                    <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
-                    <td>{{ lesson.date ? lesson.date|date('Y-m-d') : '' }}</td>
-                    <td>{{ lesson.location }}</td>
-                    <td>{{ lesson.maxPersons }}</td>
-                    <td>
-                        <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
-                        <a type="button" class="btn btn-outline-warning d-inline" href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
-                        {{ include('lesson/_delete_form.html.twig') }}
-                    </td>
-                </tr>
-            {% endif %}
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                {% for lesson in lessons %}
+                    {% if app.user.id == lesson.instructeur.id %}
+                        <tr>
+                            <td>{{ lesson.id }}</td>
+                            <td>{{ lesson.trainingId.naam }}</td>
+                            <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
+                            <td>{{ lesson.date ? lesson.date|date('Y-m-d') : '' }}</td>
+                            <td>{{ lesson.location }}</td>
+                            <td>{{ lesson.maxPersons }}</td>
+                            <td>
+                                <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
+                                <a type="button" class="btn btn-outline-warning d-inline" href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
+                                {{ include('lesson/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
     <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_new') }}">Aanmaken</a>
 {% endblock %}

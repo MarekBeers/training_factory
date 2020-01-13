@@ -10,13 +10,13 @@
     </div>
     {% if app.user %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>Je bent ingelogt als: <br><br> - {{ app.user.loginname }} - <br><br></h4> <a type="button"
+            <h4>Je bent ingelogt als:</h4> <div class="d-none d-sm-block"><br></div><h4> - {{ app.user.loginname }} - </h4> <div class="d-none d-sm-block"><br></div> <a type="button"
                                                                                             class="btn btn-outline-danger"
                                                                                             href="{{ path('app_logout') }}">Uitloggen</a>
         </form>
     {% else %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>U kunt hier klikken <br><br> om te inloggen</h4><br>
+            <h4>U kunt hier klikken </h4> <div class="d-none d-sm-block"><br></div>  <h4>om te inloggen</h4><div class="d-none d-sm-block"><br></div>
             <a type="button" href="/login" class="btn btn-outline-danger">Inloggen</a>
         </form>
     {% endif %}

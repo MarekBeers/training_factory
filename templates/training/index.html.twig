@@ -4,40 +4,41 @@
 
 {% block content %}
     <h1>Training index</h1>
-
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Naam</th>
-            <th>Beschrijving</th>
-            <th>Tijd</th>
-            <th>Kosten</th>
-            <th>Actie's</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for training in trainings %}
-            <tr>
-                <td>{{ training.id }}</td>
-                <td>{{ training.naam }}</td>
-                <td>{{ training.description }}</td>
-                <td>{{ training.duration ? training.duration|date('H:i') : '' }}</td>
-                <td>{{ training.costs }}</td>
-                <td>
-                    <a type="button" class="btn btn-outline-success"
-                       href="{{ path('training_show', {'id': training.id}) }}">show</a>
-                    <a type="button" class="btn btn-outline-warning"
-                       href="{{ path('training_edit', {'id': training.id}) }}">edit</a>
-                    {{ include('training/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">Geen Training Gevonden</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Naam</th>
+                    <th>Beschrijving</th>
+                    <th>Tijd</th>
+                    <th>Kosten</th>
+                    <th>Actie's</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for training in trainings %}
+                    <tr>
+                        <td>{{ training.id }}</td>
+                        <td>{{ training.naam }}</td>
+                        <td>{{ training.description }}</td>
+                        <td>{{ training.duration ? training.duration|date('H:i') : '' }}</td>
+                        <td>{{ training.costs }}</td>
+                        <td>
+                            <a type="button" class="btn btn-outline-success"
+                               href="{{ path('training_show', {'id': training.id}) }}">show</a>
+                            <a type="button" class="btn btn-outline-warning"
+                               href="{{ path('training_edit', {'id': training.id}) }}">edit</a>
+                            {{ include('training/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Geen Training Gevonden</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     <a type="button" class="btn btn-outline-success" href="{{ path('training_new') }}">Aanmaken</a>
 {% endblock %}

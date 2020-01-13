@@ -22,33 +22,35 @@
     </ul>
     <br>
     <br>
-    <table class="table" style="text-align: center">
-        <thead>
-        <tr>
-            <th>Tijd</th>
-            <th>Sport</th>
-            <th>Aantal ingeschreven deelnemers</th>
-            <th>Prijs (EUR)</th>
-            <th>Beschrijving</th>
-            <th>Inschrijven</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for lesson in lessons %}
+    <div class="table-responsive">
+        <table class="table table-bordered" style="text-align: center">
+            <thead>
             <tr>
-                <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
-                <td>{{ lesson.trainingId.naam }}</td>
-                <td>{{ lesson.maxPersons }}</td>
-                <td>{{ lesson.trainingId.costs }}</td>
-                <td>{{ lesson.trainingId.description }}</td>
-                <td><a type="button" class="btn btn-outline-success" href="#">Inschrijven</a></td>
+                <th>Tijd</th>
+                <th>Sport</th>
+                <th>Aantal ingeschreven deelnemers</th>
+                <th>Prijs (EUR)</th>
+                <th>Beschrijving</th>
+                <th>Inschrijven</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
+                    <td>{{ lesson.trainingId.naam }}</td>
+                    <td>{{ lesson.maxPersons }}</td>
+                    <td>{{ lesson.trainingId.costs }}</td>
+                    <td>{{ lesson.trainingId.description }}</td>
+                    <td><a type="button" class="btn btn-outline-success" href="#">Inschrijven</a></td>
 
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
