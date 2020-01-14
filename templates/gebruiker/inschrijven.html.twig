@@ -27,6 +27,7 @@
             <thead>
             <tr>
                 <th>Tijd</th>
+                <th>Foto</th>
                 <th>Sport</th>
                 <th>Aantal ingeschreven deelnemers</th>
                 <th>Prijs (EUR)</th>
@@ -37,12 +38,14 @@
             <tbody>
             {% for lesson in lessons %}
                 <tr>
+
                     <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
+                    <td><img class="img-fluid rounded " src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}" alt=""></td>
                     <td>{{ lesson.trainingId.naam }}</td>
                     <td>{{ lesson.maxPersons }}</td>
                     <td>{{ lesson.trainingId.costs }}</td>
                     <td>{{ lesson.trainingId.description }}</td>
-                    <td><a type="button" class="btn btn-outline-success" href="#">Inschrijven</a></td>
+                    <td><a type="button" class="btn btn-outline-success" href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a></td>
 
                 </tr>
             {% else %}

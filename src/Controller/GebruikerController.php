@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Lesson;
+use App\Entity\Registration;
 use App\Entity\user;
 use App\Form\UserType;
 use App\Repository\LessonRepository;
+use App\Repository\RegistrationRepository;
 use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +32,20 @@ class GebruikerController extends AbstractController
     /**
      * @Route("/inschrijven", name="inschrijven")
      */
-    public function inschrijvenOverzicht(LessonRepository $lessonRepository): Response
+    public function inschrijvenPage(LessonRepository $lessonRepository): Response
     {
         return $this->render('gebruiker/inschrijven.html.twig', [
             'lessons' => $lessonRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/inschrijvenoverzicht", name="inschrijvenoverzicht")
+     */
+    public function inschrijvenOverzicht(RegistrationRepository $registrationRepository): Response
+    {
+        return $this->render('gebruiker/overzichtinschrijven.html.twig', [
+            'registrations' => $registrationRepository->findAll(),
         ]);
     }
 
@@ -57,5 +70,30 @@ class GebruikerController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/inschrijven/{id}" , name="app_nu_inschrijvingen")
+     */
+    public function inschrijvenLesson($id)
+    {
+        $les = $this->getDoctrine()
+            ->getRepository(Lesson::class)
+            ->find($id);
+
+        $user=$this->getUser();
+
+        $registration=new Registration();
+        $registration->setLessonId($les);
+        $registration->setUser($user);
+        $registration->setPayment(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($registration);
+        $entityManager->flush();
+
+//        return $this->render('pages/home.html.twig', [
+//            'page_name' => 'app_latere_inschrijvingen'
+//        ]);
+        return $this->redirectToRoute('userinschrijven');
     }
 }

@@ -95,6 +95,11 @@ class user implements UserInterface
      */
     private $lessons;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Registration", mappedBy="user")
+     */
+    private $registrations;
+
 
 
 
@@ -342,6 +347,37 @@ class user implements UserInterface
             // set the owning side to null (unless already changed)
             if ($lesson->getInstructeur() === $this) {
                 $lesson->setInstructeur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Registration[]
+     */
+    public function getRegistrations(): Collection
+    {
+        return $this->registrations;
+    }
+
+    public function addRegistration(Registration $registration): self
+    {
+        if (!$this->registrations->contains($registration)) {
+            $this->registrations[] = $registration;
+            $registration->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegistration(Registration $registration): self
+    {
+        if ($this->registrations->contains($registration)) {
+            $this->registrations->removeElement($registration);
+            // set the owning side to null (unless already changed)
+            if ($registration->getUser() === $this) {
+                $registration->setUser(null);
             }
         }
 

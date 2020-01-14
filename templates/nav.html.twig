@@ -10,14 +10,23 @@
     </div>
     {% if app.user %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>Je bent ingelogt als:</h4> <div class="d-none d-sm-block"><br></div><h4> - {{ app.user.loginname }} - </h4> <div class="d-none d-sm-block"><br></div> <a type="button"
-                                                                                            class="btn btn-outline-danger"
-                                                                                            href="{{ path('app_logout') }}">Uitloggen</a>
+            <h4>Welkom {{ app.user.firstname|first }}. {{ app.user.lastname }}</h4>
+            <div class="d-none d-sm-block"><br></div>
+            <h4> {% if is_granted("ROLE_ADMIN") %}
+                    - administratie -
+                {% elseif is_granted("ROLE_INSTRUCTEUR") %}
+                    - instructeur -
+                {% elseif is_granted("ROLE_USER") %}
+                    - klant -
+                {% endif %} </h4>
+            <div class="d-none d-sm-block"><br></div>
+            <a type="button" class="btn btn-outline-danger" href="{{ path('app_logout') }}">Uitloggen</a>
+
         </form>
     {% else %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
             <h4>U kunt hier klikken </h4> <div class="d-none d-sm-block"><br></div>  <h4>om te inloggen</h4><div class="d-none d-sm-block"><br></div>
-            <a type="button" href="/login" class="btn btn-outline-danger">Inloggen</a>
+            <a  href="/login" class="btn btn-outline-danger">Inloggen</a>
         </form>
     {% endif %}
 </div>
@@ -28,23 +37,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-{#            <li class="nav-item" {% if app.request.get('_route') == 'home' %} style="font-weight: bold" {% endif %}>#}
-{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'home' %} href="/" {% endif %}>Home</a>#}
-{#            </li>#}
-{#            <li class="nav-item" {% if app.request.get('_route') == 'trainingaanbod' %} style="font-weight: bold" {% endif %}>#}
-{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'trainingaanbod' %} href="/trainingaanbod" {% endif %}>training#}
-{#                    Aanbod</a>#}
-{#            </li>#}
-{#            <li class="nav-item" {% if app.request.get('_route') == 'contact' %} style="font-weight: bold" {% endif %}>#}
-{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'contact' %} href="/contact" {% endif %}>Contact info</a>#}
-{#            </li>#}
-{#            <li class="nav-item" {% if app.request.get('_route') == 'inschrijven' %} style="font-weight: bold" {% endif %}>#}
-{#                <a class="nav-link text-danger" {% if app.request.get('_route') != 'inschrijven' %} href="/inschrijven" {% endif %}>Inschrijven#}
-{#                    op les </a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link text-danger" href="#">Gegevens lid wijzigen</a>#}
-{#            </li>#}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"
@@ -100,7 +92,7 @@
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
+                       href="/user/inschrijvenoverzicht" {% if app.request.get('_route') == 'userinschrijvenoverzicht' %} style="font-weight: bold" {% endif %}>
                         Overzicht inschrijven</a>
                 </li>
                 <li class="nav-item">

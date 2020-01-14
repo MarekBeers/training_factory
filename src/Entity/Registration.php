@@ -19,7 +19,7 @@ class Registration
     private $id;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $payment;
 
@@ -27,6 +27,11 @@ class Registration
      * @ORM\ManyToOne(targetEntity="App\Entity\lesson", inversedBy="registrations")
      */
     private $lesson_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="registrations")
+     */
+    private $user;
 
 
     public function __construct()
@@ -61,6 +66,18 @@ class Registration
     public function setLessonId(?lesson $lesson_id): self
     {
         $this->lesson_id = $lesson_id;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
