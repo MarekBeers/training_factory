@@ -9,13 +9,12 @@
         <table class="table table-bordered" style="text-align: center">
             <thead>
             <tr>
+                <th>Datum</th>
                 <th>Tijd</th>
-                <th>Foto</th>
                 <th>Sport</th>
                 <th>Aantal ingeschreven deelnemers</th>
                 <th>Prijs (EUR)</th>
-                <th>Beschrijving</th>
-                <th>Inschrijven</th>
+                <th>Uitschrijven</th>
             </tr>
             </thead>
             <tbody>
@@ -23,7 +22,16 @@
                 <tr>
 
                     <td>{{ registration.lessonId.date  ? registration.lessonId.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ registration.lessonId.time  ? registration.lessonId.time|date('H:i') : '' }}</td>
                     <td>{{ registration.lessonId.trainingId.naam }}</td>
+                    <td>{{ registration.lessonId.registrations|length }}</td>
+                    <td>{{ registration.lessonId.trainingId.costs }}</td>
+                    <td><form class="d-inline" method="post" action="{{ path('userlesson_user_delete', {'id': registration.lessonId.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ registration.lessonId.id) }}">
+                            <button class="btn btn-outline-danger d-inline">Uitschrijven</button>
+                        </form></td>
+
 {#                    <td><img class="img-fluid rounded " src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}" alt=""></td>#}
 {#                    <td>{{ lesson.trainingId.naam }}</td>#}
 {#                    <td>{{ lesson.maxPersons }}</td>#}

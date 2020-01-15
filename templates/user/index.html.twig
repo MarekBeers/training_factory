@@ -18,7 +18,7 @@
             <tbody>
 
             {% for user in users %}
-                {% if "ROLE_USER" in user.roles and app.request.get('_route') == 'user_index' %}
+                {% if "ROLE_USER" in user.roles and app.request.get('_route') == 'adminuser_index' %}
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.email }}</td>
@@ -28,13 +28,13 @@
                         <td>{{ user.lastname }}</td>
                         <td>
                             <a type="button" class="btn btn-outline-success"
-                               href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                               href="{{ path('adminuser_show', {'id': user.id}) }}">show</a>
                             <a type="button" class="btn btn-outline-warning"
-                               href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                               href="{{ path('adminuser_edit', {'id': user.id}) }}">edit</a>
                             {{ include('user/_delete_form.html.twig') }}
                         </td>
                     </tr>
-                {%  elseif "ROLE_INSTRUCTEUR" in user.roles and app.request.get('_route') == 'instructeurs' %}
+                {%  elseif "ROLE_INSTRUCTEUR" in user.roles and app.request.get('_route') == 'admininstructeurs' %}
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.email }}</td>
@@ -44,9 +44,9 @@
                         <td>{{ user.lastname }}</td>
                         <td>
                             <a type="button" class="btn btn-outline-success"
-                               href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                               href="{{ path('adminuser_show', {'id': user.id}) }}">show</a>
                             <a type="button" class="btn btn-outline-warning"
-                               href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                               href="{{ path('adminuser_edit', {'id': user.id}) }}">edit</a>
                             {{ include('user/_delete_form.html.twig') }}
                         </td>
                     </tr>
@@ -59,11 +59,11 @@
             </tbody>
         </table>
     </div>
-        {% if app.request.get('_route') == 'user_index' %}
+        {% if app.request.get('_route') == 'adminuser_index' %}
             <a type="button" class="btn btn-outline-success"
-               href="{{ path('user_new') }}">Aanmaken</a>
-        {%  elseif app.request.get('_route') == 'instructeurs' %}
+               href="{{ path('adminuser_new') }}">Aanmaken</a>
+        {%  elseif app.request.get('_route') == 'admininstructeurs' %}
             <a type="button" class="btn btn-outline-success"
-               href="{{ path('instructeur_new') }}">Aanmaken</a>
+               href="{{ path('admininstructeur_new') }}">Aanmaken</a>
         {% endif %}
 {% endblock %}

@@ -29,8 +29,8 @@
                             <td>{{ lesson.location }}</td>
                             <td>{{ lesson.maxPersons }}</td>
                             <td>
-                                <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_show', {'id': lesson.id}) }}">show</a>
-                                <a type="button" class="btn btn-outline-warning d-inline" href="{{ path('lesson_edit', {'id': lesson.id}) }}">edit</a>
+                                <a type="button" class="btn btn-outline-success d-inline" href="{{ path('instructeurlesson_show', {'id': lesson.id}) }}">show</a>
+                                <a type="button" class="btn btn-outline-warning d-inline" href="{{ path('instructeurlesson_edit', {'id': lesson.id}) }}">edit</a>
                                 {{ include('lesson/_delete_form.html.twig') }}
                             </td>
                         </tr>
@@ -44,5 +44,5 @@
             </table>
         </div>
 
-    <a type="button" class="btn btn-outline-success d-inline" href="{{ path('lesson_new') }}">Aanmaken</a>
+    <a type="button" class="btn btn-outline-success d-inline" href="{{ path('instructeurlesson_new') }}">Aanmaken</a>
 {% endblock %}

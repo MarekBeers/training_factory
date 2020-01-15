@@ -36,23 +36,67 @@
             </tr>
             </thead>
             <tbody>
-            {% for lesson in lessons %}
-                <tr>
 
-                    <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
-                    <td><img class="img-fluid rounded " src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}" alt=""></td>
-                    <td>{{ lesson.trainingId.naam }}</td>
-                    <td>{{ lesson.maxPersons }}</td>
-                    <td>{{ lesson.trainingId.costs }}</td>
-                    <td>{{ lesson.trainingId.description }}</td>
-                    <td><a type="button" class="btn btn-outline-success" href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a></td>
+{#                    {% if app.user.id != registration.user.id %}#}
+{#                        a#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
 
-                </tr>
+{#                {{ lesson.registrations|raw }}#}
+{#                {% for registration in registrations %}#}
+{% with %}
+    {% set i = 0 %}
+
+
+
+                    {% for lesson in lessons %}
+{#                        {{ i }}#}
+{#                        {% set i = i + 1 %}#}
+
+{#                        {% set x = 0 %}#}
+{#                        {% for registration in registrations %}#}
+
+{#                            {% set x = x + 1 %}#}
+
+{#                            {% if i == x %}#}
+{#                                {% if app.user.id != registration.user.id %}#}
+                                <tr>
+                                    <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
+                                    <td><img class="img-fluid rounded "
+                                             src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}"
+                                             alt=""></td>
+                                    <td>{{ lesson.trainingId.naam }}</td>
+                                    <td>{{ lesson.maxPersons }}</td>
+                                    <td>{{ lesson.trainingId.costs }}</td>
+                                    <td>{{ lesson.trainingId.description }}</td>
+                                    <td><a type="button" class="btn btn-outline-success"
+                                           href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>
+                                    </td>
+                                </tr>
+{#                                    {% endif %}#}
+{#                                {% endif %}#}
+{#                    {% else %}#}
+{#                        <tr>#}
+{#                            <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>#}
+{#                            <td><img class="img-fluid rounded "#}
+{#                                     src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}"#}
+{#                                     alt=""></td>#}
+{#                            <td>{{ lesson.trainingId.naam }}</td>#}
+{#                            <td>{{ lesson.maxPersons }}</td>#}
+{#                            <td>{{ lesson.trainingId.costs }}</td>#}
+{#                            <td>{{ lesson.trainingId.description }}</td>#}
+{#                            <td><a type="button" class="btn btn-outline-success"#}
+{#                                   href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+
             {% else %}
                 <tr>
                     <td colspan="6">no records found</td>
                 </tr>
             {% endfor %}
+{% endwith %}
             </tbody>
         </table>
     </div>

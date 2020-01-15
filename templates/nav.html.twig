@@ -10,14 +10,14 @@
     </div>
     {% if app.user %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>Welkom {{ app.user.firstname|first }}. {{ app.user.lastname }}</h4>
+            <h4>Welkom {{ app.user.firstname|first|upper }}. {{ app.user.lastname }}</h4>
             <div class="d-none d-sm-block"><br></div>
             <h4> {% if is_granted("ROLE_ADMIN") %}
-                    - administratie -
+                    - Administratie -
                 {% elseif is_granted("ROLE_INSTRUCTEUR") %}
-                    - instructeur -
+                    - Instructeur -
                 {% elseif is_granted("ROLE_USER") %}
-                    - klant -
+                    - Klant -
                 {% endif %} </h4>
             <div class="d-none d-sm-block"><br></div>
             <a type="button" class="btn btn-outline-danger" href="{{ path('app_logout') }}">Uitloggen</a>
@@ -45,17 +45,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/admin/user/instructeurs" {% if app.request.get('_route') == 'instructeurs' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/user/instructeurs" {% if app.request.get('_route') == 'admininstructeurs' %} style="font-weight: bold" {% endif %}>
                         Instructeurs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/admin/user/gebruikers" {% if app.request.get('_route') == 'user_index' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/user/gebruikers" {% if app.request.get('_route') == 'adminuser_index' %} style="font-weight: bold" {% endif %}>
                         Leden</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-danger"
-                       href="/admin/training" {% if app.request.get('_route') == 'training_index' %} style="font-weight: bold" {% endif %}>
+                       href="/admin/training" {% if app.request.get('_route') == 'admintraining_index' %} style="font-weight: bold" {% endif %}>
                         Trainingen</a>
                 </li>
             {% elseif is_granted('ROLE_INSTRUCTEUR') %}
@@ -66,7 +66,7 @@
                 </li>
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
-                       href="/instructeur/lessen/" {% if app.request.get('_route') == 'lesson_index' %} style="font-weight: bold" {% endif %}>
+                       href="/instructeur/lessen/" {% if app.request.get('_route') == 'instructeurlesson_index' %} style="font-weight: bold" {% endif %}>
                         Lessen</a>
                 </li>
                 <li class="nav-item text-danger">

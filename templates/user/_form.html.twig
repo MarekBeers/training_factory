@@ -1,20 +1,22 @@
-{{ form_start(form) }}
+<div class="d-inline">
+    {{ form_start(form) }}
+</div>
     {{ form_widget(form) }}
     {% if is_granted('ROLE_ADMIN') %}
-        {% if app.request.get('_route') == 'user_new' %}
+        {% if app.request.get('_route') == 'adminuser_new' %}
             <a type="button" class="btn btn-outline-success"
-               href="{{ path('user_index') }}">terug</a>
-        {% elseif app.request.get('_route') == 'instructeur_new' %}
+               href="{{ path('adminuser_index') }}">terug</a>
+        {% elseif app.request.get('_route') == 'admininstructeur_new' %}
             <a type="button" class="btn btn-outline-success"
-               href="{{ path('instructeurs') }}">terug</a>
-        {% elseif app.request.get('_route') == 'user_edit' %}
+               href="{{ path('admininstructeurs') }}">terug</a>
+        {% elseif app.request.get('_route') == 'adminuser_edit' %}
             <a type="button" class="btn btn-outline-success"
-               href="{{ path('instructeurs') }}">terug</a>
+               href="{{ path('admininstructeurs') }}">terug</a>
         {% endif %}
     {% endif %}
     <button class="btn btn-outline-warning ">{{ button_label|default('Save') }}</button>
-    {% if app.request.get('_route') != 'user_new' and app.request.get('_route') != 'lidworden' and app.request.get('_route') != 'instructeur_new' and app.request.get('_route') != 'useruser_edit' %}
+{{ form_end(form) }}
+    {% if app.request.get('_route') != 'adminuser_new' and app.request.get('_route') != 'lidworden' and app.request.get('_route') != 'admininstructeur_new' and app.request.get('_route') != 'useruser_edit' %}
         {{ include('user/_delete_form.html.twig') }}
     {% endif %}
-{{ form_end(form) }}
 

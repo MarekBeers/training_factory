@@ -29,13 +29,13 @@
             </tr>
 
         </tbody>
-        <img class="img-fluid rounded " src="{{ asset('uploads/brochures/' ~ training.BrochureFilename) }}" alt="">
+        <img class="img-fluid rounded " src="{{ asset('uploads/brochures/' ~ training.BrochureFilename) }}" style="height: 250px" alt="">
 
     </table>
 
-    <a type="button" class="btn btn-outline-success" href="{{ path('training_index') }}">Terug</a>
+    <a type="button" class="btn btn-outline-success" href="{{ path('admintraining_index') }}">Terug</a>
 
-    <a type="button" class="btn btn-outline-warning" href="{{ path('training_edit', {'id': training.id}) }}">edit</a>
+    <a type="button" class="btn btn-outline-warning" href="{{ path('admintraining_edit', {'id': training.id}) }}">edit</a>
 
     {{ include('training/_delete_form.html.twig') }}
 {% endblock %}

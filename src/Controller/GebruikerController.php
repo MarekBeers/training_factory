@@ -32,10 +32,11 @@ class GebruikerController extends AbstractController
     /**
      * @Route("/inschrijven", name="inschrijven")
      */
-    public function inschrijvenPage(LessonRepository $lessonRepository): Response
+    public function inschrijvenPage(LessonRepository $lessonRepository, RegistrationRepository $registrationRepository): Response
     {
         return $this->render('gebruiker/inschrijven.html.twig', [
             'lessons' => $lessonRepository->findAll(),
+            'registrations' => $registrationRepository->findAll(),
         ]);
     }
 
@@ -95,5 +96,19 @@ class GebruikerController extends AbstractController
 //            'page_name' => 'app_latere_inschrijvingen'
 //        ]);
         return $this->redirectToRoute('userinschrijven');
+    }
+
+    /**
+     * @Route("/uitschrijven/{id}", name="lesson_user_delete", methods={"DELETE"})
+     */
+    public function lesDelete(Request $request, Registration $registration): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$registration->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($registration);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('inschrijvenoverzicht');
     }
 }
