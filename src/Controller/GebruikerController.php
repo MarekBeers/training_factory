@@ -109,6 +109,6 @@ class GebruikerController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('inschrijvenoverzicht');
+        return $this->redirectToRoute('userinschrijvenoverzicht');
     }
 }
