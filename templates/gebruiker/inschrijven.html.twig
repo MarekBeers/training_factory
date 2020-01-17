@@ -48,11 +48,7 @@
 
             {% set used = 'false' %}
             {% for lesson in lessons %}
-
                 {% for registration in registrations %}
-                    {{ used }}
-
-
                     {% if registration.lessonId.id != lesson.id and registration.user.id == app.user.id %}
                         <tr>
                             <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
@@ -75,34 +71,38 @@
                         </tr>
                         {% set used = 'true' %}
 
-                        {% else %}
-                            {% if used == 'true' %}
-                                <tr>
-                                    <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
-                                    <td><img class="img-fluid rounded "
-                                             src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}"
-                                             alt="" style="height: 200px"></td>
-                                    <td>{{ lesson.trainingId.naam }}</td>
-                                    <td>{{ lesson.registrations|length }}/{{ lesson.maxPersons }}</td>
-                                    <td>{{ lesson.trainingId.costs }}</td>
-                                    <td>{{ lesson.trainingId.description }}</td>
-                                    {% if lesson.registrations|length < lesson.maxPersons %}
-                                        <td><a type="button" class="btn btn-outline-success"
-                                               href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>
-                                        </td>
-                                    {% else %}
-                                        <td><a type="button" class="btn btn-outline-danger"
-                                               href="#">Vol</a>
-                                        </td>
-                                    {% endif %}
-                                </tr>
-                            {% endif %}
+                    {% else %}
                     {% endif %}
                 {% endfor %}
-
             {% endfor %}
-            {%  %}
+            {% for lesson in lessons %}
 
+                {% if lesson.registration ==  app.user.id %}
+                    same
+                {% endif %}
+
+                {% if used == 'false' %}
+                    <tr>
+                        <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
+                        <td><img class="img-fluid rounded "
+                                 src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}"
+                                 alt="" style="height: 200px"></td>
+                        <td>{{ lesson.trainingId.naam }}</td>
+                        <td>{{ lesson.registrations|length }}/{{ lesson.maxPersons }}</td>
+                        <td>{{ lesson.trainingId.costs }}</td>
+                        <td>{{ lesson.trainingId.description }}</td>
+                        {% if lesson.registrations|length < lesson.maxPersons %}
+                            <td><a type="button" class="btn btn-outline-success"
+                                   href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>
+                            </td>
+                        {% else %}
+                            <td><a type="button" class="btn btn-outline-danger"
+                                   href="#">Vol</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
 
 
 
