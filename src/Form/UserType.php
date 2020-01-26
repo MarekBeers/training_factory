@@ -33,6 +33,7 @@ class UserType extends AbstractType
             ])
             ->add('preprovision', TextType::class ,[
                 'label'=> 'Tussenvoegsel',
+                'required' => false,
             ])
             ->add('lastname', TextType::class ,[
                 'label'=> 'Achternaam',

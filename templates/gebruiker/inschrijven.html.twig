@@ -36,52 +36,7 @@
             </tr>
             </thead>
             <tbody>
-
-            {#                    {% if app.user.id != registration.user.id %}#}
-            {#                        a#}
-            {#                    {% endif %}#}
-            {#                {% endfor %}#}
-
-            {#                {{ lesson.registrations|raw }}#}
-            {#                {% for registration in registrations %}#}
-
-
-            {% set used = 'false' %}
             {% for lesson in lessons %}
-                {% for registration in registrations %}
-                    {% if registration.lessonId.id != lesson.id and registration.user.id == app.user.id %}
-                        <tr>
-                            <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
-                            <td><img class="img-fluid rounded "
-                                     src="{{ asset('uploads/brochures/' ~ lesson.trainingId.BrochureFilename) }}"
-                                     alt="" style="height: 200px"></td>
-                            <td>{{ lesson.trainingId.naam }}</td>
-                            <td>{{ lesson.registrations|length }}/{{ lesson.maxPersons }}</td>
-                            <td>{{ lesson.trainingId.costs }}</td>
-                            <td>{{ lesson.trainingId.description }}</td>
-                            {% if lesson.registrations|length < lesson.maxPersons %}
-                                <td><a type="button" class="btn btn-outline-success"
-                                       href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>
-                                </td>
-                            {% else %}
-                                <td><a type="button" class="btn btn-outline-danger"
-                                       href="#">Vol</a>
-                                </td>
-                            {% endif %}
-                        </tr>
-                        {% set used = 'true' %}
-
-                    {% else %}
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-            {% for lesson in lessons %}
-
-                {% if lesson.registration ==  app.user.id %}
-                    same
-                {% endif %}
-
-                {% if used == 'false' %}
                     <tr>
                         <td>{{ lesson.time ? lesson.time|date('H:i') : '' }}</td>
                         <td><img class="img-fluid rounded "
@@ -91,31 +46,30 @@
                         <td>{{ lesson.registrations|length }}/{{ lesson.maxPersons }}</td>
                         <td>{{ lesson.trainingId.costs }}</td>
                         <td>{{ lesson.trainingId.description }}</td>
-                        {% if lesson.registrations|length < lesson.maxPersons %}
+                        {% set used = 'false' %}
+                        {% for registration in lesson.registrations %}
+                            {% if registration.user.id == app.user.id %}
+                                <td><a type="button" class="btn btn-outline-danger"
+                                       href="#">Ingeschreven</a>
+                                </td>
+                                {% set used = 'true' %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if lesson.registrations|length < lesson.maxPersons and used == 'false' %}
                             <td><a type="button" class="btn btn-outline-success"
                                    href="/user/inschrijven/{{ lesson.id }}">Inschrijven</a>
                             </td>
-                        {% else %}
+                        {% elseif used == 'false' %}
                             <td><a type="button" class="btn btn-outline-danger"
                                    href="#">Vol</a>
                             </td>
                         {% endif %}
                     </tr>
-                {% endif %}
-            {% endfor %}
-
-
-
-
-
-
-
-            {#            {% else %}#}
-            {#                <tr>#}
-            {#                    <td colspan="6">no records found</td>#}
-            {#                </tr>#}
-            {#            {% endfor %}#}
-
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
             </tbody>
         </table>
     </div>
