@@ -10,7 +10,7 @@
     </div>
     {% if app.user %}
         <form class="p-2 ml-auto text-danger" style="text-align: right">
-            <h4>Welkom {{ app.user.firstname|first|upper }}. {{ app.user.lastname }}</h4>
+            <h4>Welkom {{ app.user.firstname|first|upper }}. {{ app.user.lastname|capitalize }}</h4>
             <div class="d-none d-sm-block"><br></div>
             <h4> {% if is_granted("ROLE_ADMIN") %}
                     - Administratie -
@@ -67,18 +67,9 @@
                 <li class="nav-item text-danger">
                     <a class="nav-link text-danger"
                        href="/instructeur/lessen/" {% if app.request.get('_route') == 'instructeurlesson_index' %} style="font-weight: bold" {% endif %}>
-                        Lessen</a>
+                        Lessen beheer</a>
                 </li>
-                <li class="nav-item text-danger">
-                    <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
-                        Overzicht inschrijven</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger"
-                       href="#" {% if app.request.get('_route') == '' %} style="font-weight: bold" {% endif %}>
-                        Gegevens lid wijzigen</a>
-                </li>
+
             {% elseif is_granted('ROLE_USER') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"

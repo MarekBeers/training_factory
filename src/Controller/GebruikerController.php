@@ -111,4 +111,18 @@ class GebruikerController extends AbstractController
 
         return $this->redirectToRoute('userinschrijvenoverzicht');
     }
+
+    /**
+     * @Route("/inschrijven/uitschrijven/{id}", name="lesson_user_delete_inschrijven", methods={"DELETE"})
+     */
+    public function lesDeleteIn(Request $request, Registration $registration): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$registration->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($registration);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('userinschrijven');
+    }
 }

@@ -7,62 +7,102 @@
 
     <table class="table">
         <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Loginname</th>
+            <td>{{ user.loginname }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Preprovision</th>
+            <td>{{ user.preprovision }}</td>
+        </tr>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Dateofbirth</th>
+            <td>{{ user.dateofbirth  ? user.dateofbirth|date('d-m-Y') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>{{ user.gender }}</td>
+        </tr>
+        <tr>
+            <th>Hiring_date</th>
+            <td>{{ user.hiringDate }}</td>
+        </tr>
+        <tr>
+            <th>Salary</th>
+            <td>{{ user.salary }}</td>
+        </tr>
+        <tr>
+            <th>Street</th>
+            <td>{{ user.street }}</td>
+        </tr>
+        <tr>
+            <th>Postal_code</th>
+            <td>{{ user.postalCode }}</td>
+        </tr>
+        <tr>
+            <th>Place</th>
+            <td>{{ user.place }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered" style="text-align: center">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>Zaal</th>
+            <th>Sport</th>
+            <th>Prijs (EUR)</th>
+            <th>Betaald</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for registration in registrations %}
+            {% if registration.user.id == user.id %}
+                <tr>
+                    <td>{{ registration.lessonId.date  ? registration.lessonId.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ registration.lessonId.time  ? registration.lessonId.time|date('H:i') : '' }}</td>
+                    <td>{{ registration.lessonId.location }}</td>
+                    <td>{{ registration.lessonId.trainingId.naam }}</td>
+                    <td>{{ registration.lessonId.trainingId.costs }}</td>
+                    <td>
+                        <div>
+                            <input type="checkbox" name="betaald" value="1" checked>
+                        </div>
+                    </td>
+                </tr>
+            {% elseif registration.user.id != app.user.id %}
+            {% else %}
+                <tr>
+                    <td colspan="6">Niks gevonden</td>
+                </tr>
+            {% endif %}
+        {% else %}
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
+                <td colspan="6">Niks gevonden</td>
             </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Loginname</th>
-                <td>{{ user.loginname }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Preprovision</th>
-                <td>{{ user.preprovision }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Dateofbirth</th>
-                <td>{{ user.dateofbirth  ? user.dateofbirth|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ user.gender }}</td>
-            </tr>
-            <tr>
-                <th>Hiring_date</th>
-                <td>{{ user.hiringDate }}</td>
-            </tr>
-            <tr>
-                <th>Salary</th>
-                <td>{{ user.salary }}</td>
-            </tr>
-            <tr>
-                <th>Street</th>
-                <td>{{ user.street }}</td>
-            </tr>
-            <tr>
-                <th>Postal_code</th>
-                <td>{{ user.postalCode }}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ user.place }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 
@@ -75,12 +115,12 @@
     {% endif %}
 
 
-{#    <a href="{{ path('user_index') }}">back to list</a>#}
+    {#    <a href="{{ path('user_index') }}">back to list</a>#}
 
     <a type="button" class="btn btn-outline-warning"
        href="{{ path('adminuser_edit', {'id': user.id}) }}">edit</a>
 
-{#    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
+    {#    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>#}
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}
