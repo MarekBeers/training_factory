@@ -69,7 +69,11 @@
                        href="/instructeur/lessen/" {% if app.request.get('_route') == 'instructeurlesson_index' %} style="font-weight: bold" {% endif %}>
                         Lessen beheer</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link text-danger"
+                       href="/instructeur/{{ app.user.id }}/edit" {% if app.request.get('_route') == 'instructeuruser_edit' %} style="font-weight: bold" {% endif %}>
+                        Gegevens wijzigen</a>
+                </li>
             {% elseif is_granted('ROLE_USER') %}
                 <li class="nav-item">
                     <a class="nav-link text-danger"

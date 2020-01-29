@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lesson{% endblock %}
+
 
 {% block content %}
     <h1>Lesson</h1>
@@ -17,15 +17,15 @@
                     <td>{{ lesson.trainingId.naam }}</td>
                 </tr>
                 <tr>
-                    <th>Time</th>
+                    <th>Tijd</th>
                     <td>{{ lesson.time ? lesson.time|date('H:i:s') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Date</th>
+                    <th>Datum</th>
                     <td>{{ lesson.date ? lesson.date|date('Y-m-d') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Location</th>
+                    <th>Zaal</th>
                     <td>{{ lesson.location }}</td>
                 </tr>
                 <tr>
@@ -34,6 +34,41 @@
                 </tr>
             </tbody>
         </table>
+        <br>
+        <h1>Ingeschreven deelnemers</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered" style="text-align: center">
+                <thead>
+                <tr>
+                    <th>Voornaam</th>
+                    <th>Achternaam</th>
+                    <th>Email</th>
+                    <th>Betalen</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for registration in registrations %}
+                    {% if registration.lessonId.id == lesson.id %}
+                        <tr>
+                            <td>{{ registration.user.firstname }}</td>
+                            <td>{{ registration.user.lastname }}</td>
+                            <td>{{ registration.user.email }}</td>
+                            <td>
+                                {% if registration.payment == false %}
+                                    <form class="d-inline" method="post" action="{{ path('instructeuruser_betaalt', {'id': registration.id}) }}" onsubmit="return confirm('Weet je zeker dat de klant heeft betaald?');">
+                                        <input type="hidden" name="_method" value="BETAAL">
+                                        <button class="btn btn-outline-warning d-inline">Betalen</button>
+                                    </form>
+                                {% else %}
+                                    <button class="btn btn-outline-success">Betaalt</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <a type="button" class="btn btn-outline-success" href="{{ path('instructeurlesson_index') }}">terug</a>
 

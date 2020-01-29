@@ -51,8 +51,8 @@ class GebruikerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     */
+ * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+ */
     public function edit(Request $request, user $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -87,7 +87,7 @@ class GebruikerController extends AbstractController
         $registration=new Registration();
         $registration->setLessonId($les);
         $registration->setUser($user);
-        $registration->setPayment(true);
+        $registration->setPayment(false);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($registration);
         $entityManager->flush();

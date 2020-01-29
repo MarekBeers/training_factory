@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
 
 {% block content %}
     <h1>User</h1>
@@ -105,6 +104,8 @@
         {% endfor %}
         </tbody>
     </table>
+
+
 
     {% if "ROLE_USER" in user.roles %}
         <a type="button" class="btn btn-outline-success"

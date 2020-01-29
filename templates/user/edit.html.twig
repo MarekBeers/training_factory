@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
 
 {% block content %}
     <h1>Edit Gebruiker</h1>
 
-    {% if "ROLE_USER" in app.user.roles %}
+    {% if "ROLE_USER" in app.user.roles or "ROLE_INSTRUCTEUR" in app.user.roles %}
         {% if app.user.id == user.id %}
             {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+        {% elseif "ROLE_INSTRUCTEUR" in app.user.roles %}
+            <h3>Hier hoort u niet ga terug:</h3>
+            <a class="btn btn-outline-warning" href="/instructeur/{{ app.user.id }}/edit">Terug</a>
+        {% elseif "ROLE_USER" in app.user.roles %}
+            <h3>Hier hoort u niet ga terug:</h3>
+            <a class="btn btn-outline-warning" href="/user/{{ app.user.id }}/edit">Terug</a>
         {% endif %}
     {% else %}
         {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
