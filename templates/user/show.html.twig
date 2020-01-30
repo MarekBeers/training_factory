@@ -92,10 +92,10 @@
                             <td>{{ lesson.location }}</td>
                             <td>{{ lesson.trainingId.naam }}</td>
                         </tr>
-                    {% elseif registration.user.id != app.user.id %}
+                    {% elseif lesson.instructeur.id != app.user.id %}
                     {% else %}
                         <tr>
-                            <td colspan="6">Niks gevonden</td>
+                            <td colspan="4">Niks gevonden</td>
                         </tr>
                     {% endif %}
                 {% endfor %}
