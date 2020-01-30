@@ -1,0 +1,11 @@
+{% if user.status == true %}
+    <form class="d-inline" method="post" action="{% if user.roles  == ['ROLE_USER'] %}{{ path('adminuser_disable', {'id': user.id}) }}{% elseif user.roles  == ['ROLE_INSTRUCTEUR'] %} {{ path('admininstructeur_disable', {'id': user.id}) }} {% endif %}" onsubmit="return confirm('Weet je zeker dat je de klant wilt uitzetten?');">
+        <input type="hidden" name="_method" value="DISABLE">
+        <button class="btn btn-outline-danger d-inline">Uitzetten</button>
+    </form>
+{% else %}
+    <form class="d-inline" method="post" action="{% if user.roles  == ['ROLE_USER'] %}{{ path('adminuser_enable', {'id': user.id}) }}{% elseif user.roles  == ['ROLE_INSTRUCTEUR'] %} {{ path('admininstructeur_enable', {'id': user.id}) }} {% endif %}" onsubmit="return confirm('Weet je zeker dat je de klant wilt aanzetten?');">
+        <input type="hidden" name="_method" value="ENABLE">
+        <button class="btn btn-outline-success d-inline">Aanzetten</button>
+    </form>
+{% endif %}

@@ -22,6 +22,7 @@
     </ul>
     <br>
     <br>
+
     <div class="table-responsive">
         <table class="table table-bordered" style="text-align: center">
             <thead>
@@ -46,6 +47,7 @@
                     <td>{{ lesson.registrations|length }}/{{ lesson.maxPersons }}</td>
                     <td>{{ lesson.trainingId.costs }}</td>
                     <td>{{ lesson.trainingId.description }}</td>
+
                     {% set used = 'false' %}
                     {% for registration in lesson.registrations %}
                         {% if registration.user.id == app.user.id %}

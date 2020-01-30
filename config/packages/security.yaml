@@ -1,6 +1,6 @@
 security:
     encoders:
-        App\Entity\User:
+        App\Entity\user:
             algorithm: argon2id
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers

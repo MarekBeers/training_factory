@@ -100,6 +100,11 @@ class user implements UserInterface
      */
     private $registrations;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
 
 
 
@@ -380,6 +385,18 @@ class user implements UserInterface
                 $registration->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

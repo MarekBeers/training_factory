@@ -1,3 +1,4 @@
+{% set accountstatus = true %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +12,32 @@
     {% endblock %}
 </head>
 <body>
-{% block body %}
-    <div style="margin-left: 2%; margin-right: 2%;">
-        {% include 'nav.html.twig' %}
-        {% block header %}{% endblock %}
-        <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
-        {% block content %}{% endblock %}
-        </div>
-    </div>
-    {% block footer %}
-        <footer id="sticky-footer" class="py-4 text-white-50" style="background-color: #192a56; margin-left: 2%; margin-right: 2%;">
-            <div class="container text-center">
-                <h3 style="color: red">Training Center Den Haag - 010 519 0532</h3>
-                <small>developed bij FastDevelopment</small>
+    {% if app.user %}
+        {% if app.user.status == false %}
+            {% set accountstatus = false %}
+            <h1>Uw account is uit geschakeld login uit:</h1>
+            <a class="btn btn-success" href="/logout">Uitloggen</a>
+        {% endif %}
+    {% endif %}
+{% if accountstatus == true %}
+    {% block body %}
+        <div style="margin-left: 2%; margin-right: 2%;">
+            {% include 'nav.html.twig' %}
+            {% block header %}{% endblock %}
+            <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
+                {% block content %}{% endblock %}
             </div>
-        </footer>
+        </div>
+        {% block footer %}
+            <footer id="sticky-footer" class="py-4 text-white-50" style="background-color: #192a56; margin-left: 2%; margin-right: 2%;">
+                <div class="container text-center">
+                    <h3 style="color: red">Training Center Den Haag - 010 519 0532</h3>
+                    <small>developed bij FastDevelopment</small>
+                </div>
+            </footer>
+        {% endblock %}
     {% endblock %}
-{% endblock %}
+{% endif %}
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

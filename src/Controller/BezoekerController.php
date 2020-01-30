@@ -43,6 +43,7 @@ class BezoekerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $role = array('ROLE_USER');
             $user->setRoles($role);
+            $user->setStatus(true);
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);

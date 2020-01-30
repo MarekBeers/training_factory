@@ -62,10 +62,6 @@
             <th>Roles</th>
             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         </tr>
-        <tr>
-            <th>Aanzetten/Uitzetten</th>
-            <td>{{ include('user/disable-enable.html.twig') }}</td>
-        </tr>
         </tbody>
     </table>
 
@@ -76,31 +72,19 @@
             <th>Tijd</th>
             <th>Zaal</th>
             <th>Sport</th>
-            {% if user.roles != ['ROLE_INSTRUCTEUR'] %}
             <th>Prijs (EUR)</th>
             <th>Betaald</th>
-            {% endif %}
         </tr>
         </thead>
         <tbody>
         {% for registration in registrations %}
-            {% if user.roles  == ['ROLE_INSTRUCTEUR'] %}
-                {% if registration.lessonId.instructeur.id == user.id %}
-                    <tr>
-                        <td>{{ registration.lessonId.date  ? registration.lessonId.date|date('Y-m-d') : '' }}</td>
-                        <td>{{ registration.lessonId.time  ? registration.lessonId.time|date('H:i') : '' }}</td>
-                        <td>{{ registration.lessonId.location }}</td>
-                        <td>{{ registration.lessonId.trainingId.naam }}</td>
-                    </tr>
-                {% elseif registration.user.id != app.user.id %}
-                {% else %}
-                    <tr>
-                        <td colspan="6">Niks gevonden</td>
-                    </tr>
-                {% endif %}
-            {% else %}
 
-            {% if registration.user.id == user.id %}
+
+
+            {% if user.roles ? user.roles|json_encode : '' == ["ROLE_INSTRUCTEUR"] %}
+                klaas
+            {% endif %}
+            {% if registration.lessonId.instructeur.id == user.id %}
                 <tr>
                     <td>{{ registration.lessonId.date  ? registration.lessonId.date|date('Y-m-d') : '' }}</td>
                     <td>{{ registration.lessonId.time  ? registration.lessonId.time|date('H:i') : '' }}</td>
@@ -108,11 +92,9 @@
                     <td>{{ registration.lessonId.trainingId.naam }}</td>
                     <td>{{ registration.lessonId.trainingId.costs }}</td>
                     <td>
-                        {% if registration.payment == true %}
-                            <button class="btn btn-outline-success">Betaalt</button>
-                        {% else %}
-                            <button class="btn btn-outline-warning">Niet betaalt</button>
-                        {% endif %}
+                        <div>
+                            <input type="checkbox" name="betaald" value="1" checked>
+                        </div>
                     </td>
                 </tr>
             {% elseif registration.user.id != app.user.id %}
@@ -120,7 +102,6 @@
                 <tr>
                     <td colspan="6">Niks gevonden</td>
                 </tr>
-            {% endif %}
             {% endif %}
         {% else %}
             <tr>

@@ -171,6 +171,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $role = array('ROLE_USER');
             $user->setRoles($role);
+            $user->setStatus(true);
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
@@ -198,6 +199,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $role = array('ROLE_INSTRUCTEUR');
             $user->setRoles($role);
+            $user->setStatus(true);
             $entityManager = $this->getDoctrine()->getManager();
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
@@ -261,4 +263,47 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('adminuser_index');
     }
 
+    /**
+     * @Route("/user/{id}/disable", name="user_disable", methods={"DISABLE"})
+     */
+    public function userDisable(user $user): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user->setStatus(false);
+        $entityManager->flush();
+        return $this->redirectToRoute('adminuser_show', ['id'=>$user->getId()]);
+    }
+
+    /**
+     * @Route("/user/{id}/enable", name="user_enable", methods={"ENABLE"})
+     */
+    public function userEnable(user $user): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user->setStatus(true);
+        $entityManager->flush();
+        return $this->redirectToRoute('adminuser_show', ['id'=>$user->getId()]);
+    }
+
+    /**
+     * @Route("/user/{id}/disable", name="instructeur_disable", methods={"DISABLE"})
+     */
+    public function instructeurDisable(user $user): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user->setStatus(false);
+        $entityManager->flush();
+        return $this->redirectToRoute('adminuser_show', ['id'=>$user->getId()]);
+    }
+
+    /**
+     * @Route("/user/{id}/enable", name="instructeur_enable", methods={"ENABLE"})
+     */
+    public function instructeurEnable(user $user): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user->setStatus(true);
+        $entityManager->flush();
+        return $this->redirectToRoute('adminuser_show', ['id'=>$user->getId()]);
+    }
 }
