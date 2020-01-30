@@ -7,6 +7,7 @@ use App\Entity\training;
 use App\Entity\user;
 use App\Form\TrainingType;
 use App\Form\UserType;
+use App\Repository\LessonRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\TrainingRepository;
 use App\Repository\UserRepository;
@@ -218,11 +219,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/user/{id}", name="user_show", methods={"GET"})
      */
-    public function showuser(user $user, RegistrationRepository $registrationRepository): Response
+    public function showuser(user $user, RegistrationRepository $registrationRepository, LessonRepository $lessonRepository): Response
     {
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'registrations' => $registrationRepository->findAll(),
+            'lessons' => $lessonRepository->findAll(),
         ]);
     }
 
