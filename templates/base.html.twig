@@ -15,8 +15,10 @@
     {% if app.user %}
         {% if app.user.status == false %}
             {% set accountstatus = false %}
-            <h1>Uw account is uitgeschakeld, log uit:</h1>
-            <a class="btn btn-success" href="/logout">Uitloggen</a>
+            <div class="container">
+                <h1>Uw account is uitgeschakeld, log uit:</h1>
+                <a class="btn btn-success" href="/logout">Uitloggen</a>
+            </div>
         {% endif %}
     {% endif %}
 {% if accountstatus == true %}
@@ -25,6 +27,7 @@
             {% include 'nav.html.twig' %}
             {% block header %}{% endblock %}
             <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
+                {% include 'card.html.twig' %}
                 {% block content %}{% endblock %}
             </div>
         </div>
