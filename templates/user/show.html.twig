@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <h1>User</h1>
+    <h1>Gebruiker</h1>
 
     <table class="table">
         <tbody>
@@ -62,6 +62,22 @@
             <th>Roles</th>
             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         </tr>
+        {% if user.roles == ['ROLE_INSTRUCTEUR'] %}
+        <tr>
+            <th>Omzet</th>
+            <td>
+                {% set omzet = 0.00 %}
+                {% for registration in registrations %}
+                    {% if registration.lessonId.instructeur.id == user.id %}
+                        {% if registration.payment == true %}
+                            {% set omzet = omzet + registration.lessonId.trainingId.costs %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                €{{ omzet }}
+            </td>
+        </tr>
+        {% endif %}
         <tr>
             <th>Aanzetten/Uitzetten</th>
             <td>{{ include('user/disable-enable.html.twig') }}</td>
